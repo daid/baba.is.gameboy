@@ -6,10 +6,15 @@
 #INCLUDE "palette.asm"
 #INCLUDE "save.asm"
 #INCLUDE "game.asm"
+#INCLUDE "death.asm"
+#INCLUDE "move.asm"
 #INCLUDE "objects.asm"
 #INCLUDE "rules.asm"
+#INCLUDE "map.asm"
 #INCLUDE "levels.asm"
+#INCLUDE "levelselect.asm"
 #INCLUDE "render.asm"
+#INCLUDE "undo.asm"
 #INCLUDE "objectmetadata.asm"
 
 

@@ -1,28 +1,5 @@
 #SECTION "Levels", ROMX, BANK[1] {
 
-#MACRO LEVEL_ROW _name, _data {
-    dw 0, _data
-}
-
-LevelTable:
-    LEVEL_ROW "0: LINK IS YOU", Level0
-    LEVEL_ROW "1: Press A to UNDO", Level1
-    LEVEL_ROW "2: A&B is RESET", Level2
-    LEVEL_ROW "3: Out of reach", Level3
-    LEVEL_ROW "4: More out of reach", Level4
-    LEVEL_ROW "5: BABA", Level5
-    LEVEL_ROW "6: Volcano", Level6
-    LEVEL_ROW "7: Affection", Level7
-    LEVEL_ROW "8: The wall", Level8
-    LEVEL_ROW "Bonus: Prison", Level8Bonus
-    LEVEL_ROW "9: Changeless", Level9
-    LEVEL_ROW "Bonus: Ruins", Level9Bonus
-    LEVEL_ROW "10: Love letter", Level10
-    LEVEL_ROW "11: Teamwork", Level11
-    LEVEL_ROW "12: Thief!", Level12
-    LEVEL_ROW "13: Wireless", Level13
-    LEVEL_ROW "14: The end.", Level14
-
 TestLevelData:
     db   TID_BABA | TID_TEXT, $11
     db   TID_IS, $12

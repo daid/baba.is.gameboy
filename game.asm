@@ -6,8 +6,8 @@ wWinLevel:
 #SECTION "Game", ROM0 {
 
 GameHDMALines:
-;    HDMA_LIST_ENTRY GameGraphics, $8000, 128
-;    HDMA_LIST_ENTRY GameGraphics + $800, $8800, 128
+    HDMA_LIST_ENTRY GameGraphics, $8000, 128
+    HDMA_LIST_ENTRY GameGraphics + $800, $8800, 128
 
 RunGame:
     ld   a, [wCurrentLevelIndex]
@@ -103,24 +103,24 @@ RunGame:
     call DoTurn
     jp   .loop
 .playerUndo:
-    ;TODO call DoUndo
+    call DoUndo
     call ProcessRules
     call DrawLevel
     jp   .loop
 
 DoTurn:
-    ;TODO call AddUndoEntry
+    call AddUndoEntry
     call ProcessRules
     ldh  a, [hMultiPurpose0]
     inc  a
-    ;TODO call nz, DoTurnYouStep
-    ;TODO call DoMoveStep
-    ;TODO call DoTurnExecuteMoves
+    call nz, DoTurnYouStep
+    call DoMoveStep
+    call DoTurnExecuteMoves
     call BuildObjectPositionCache
-    ;TODO call DoTurnExecuteMoves
+    call DoTurnExecuteMoves
     call ProcessRules
     call ProcessTransforms
-    ;TODO call ProcessDeaths
+    call ProcessDeaths
     call CheckForWin
     call DrawLevel
     ret
@@ -168,7 +168,7 @@ CheckForWin:
     jr   .loop2
 
 LoadLevel:
-    ;TODO call ClearUndoList
+    call ClearUndoList
     xor  a
     ld   [wWinLevel], a
     ld   de, wObjects.type

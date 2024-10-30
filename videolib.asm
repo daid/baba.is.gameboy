@@ -131,6 +131,10 @@ executeHDMAList:
 
 }
 
+#MACRO HDMA_LIST_ENTRY _label, _target, _tile_count {
+    db   HIGH(_label), LOW(_label), HIGH(_target), LOW(_target), _tile_count - 1
+}
+
 #SECTION "VBlankISR", ROM0[$0040] {
     push af
     ldh  a, [hVBlankCount]
