@@ -25,6 +25,7 @@ GBC_HEADER "Baba", $1B, entry
 #SECTION "Entry", ROMX, BANK[1] {
 entry:
     ld sp, $E000
+    call setDoubleSpeed
 
     ; enable SRAM
     xor  a
@@ -51,6 +52,20 @@ entry:
     and  a, a
     jp   z, RunGame ; If we never finished the first level, jump right in.
     jp   LevelSelect
+
+setDoubleSpeed:
+    ld   a, [rKEY1]
+    add  a, a  ; if bit 7 is set, this will cause the carry flag to be set.
+    ret  c
+
+    ld   a, $30 ; disable joypad input
+    ld   [rP1], a
+    xor  a  ; set a to zero to disable interrupts
+    ld   [rIE], a
+    inc  a  ; set a to 1 to switch speeds
+    ld   [rKEY1], a
+    stop
+    ret
 }
 
 #SECTION "WRAM", WRAM0 {
