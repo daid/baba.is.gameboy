@@ -19,7 +19,7 @@
 #INCLUDE "objectmetadata.asm"
 
 
-GBC_HEADER "Baba", 0, entry
+GBC_HEADER "Baba", $1B, entry
 
 
 #SECTION "Entry", ROMX, BANK[1] {
