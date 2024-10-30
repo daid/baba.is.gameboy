@@ -41,7 +41,7 @@ RunGame:
 .loop:
     ld   a, [wWinLevel]
     and  a, a
-    ;TODO jp   nz, victoryAnimation
+    jp   nz, victoryAnimation
 
     call waitVBlank
     call RenderUpdateScreenScroll
@@ -63,7 +63,7 @@ RunGame:
     cp   PADF_A
     jr   z, .playerUndo
     cp   PADF_START
-    ;TODO jp   z, LevelSelect
+    jp   z, LevelSelect
 
     ; Handle reset
     ld   a, [wJoypadPressed]

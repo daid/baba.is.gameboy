@@ -6,6 +6,7 @@
 #INCLUDE "palette.asm"
 #INCLUDE "save.asm"
 #INCLUDE "game.asm"
+#INCLUDE "victory.asm"
 #INCLUDE "death.asm"
 #INCLUDE "move.asm"
 #INCLUDE "objects.asm"
@@ -49,7 +50,7 @@ entry:
     ld   a, [sSaveLevelCleared]
     and  a, a
     jp   z, RunGame ; If we never finished the first level, jump right in.
-    ;TODO jp   LevelSelect
+    jp   LevelSelect
 }
 
 #SECTION "WRAM", WRAM0 {
