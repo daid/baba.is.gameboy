@@ -239,5 +239,5 @@ BuildObjectPositionCache:
 
 #SECTION "GameGFX", ROMX[$4000], BANK[1] {
 GameGraphics:
-;TODO #INCGFX "baba.png"
+#INCGFX "baba.png"
 }
