@@ -1,5 +1,9 @@
 #MACRO LEVEL_ROW _name, _data {
-    dw 0, _data
+    #SECTION _name, ROMX, BANK[1] {
+    level_name ## _data:
+        db _name
+    }
+    dw level_name ## _data, _data
 }
 
 #SECTION "Map", ROMX, BANK[1] {

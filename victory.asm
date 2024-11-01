@@ -48,7 +48,7 @@ victoryAnimation:
     push af
     call waitVBlank
     call updateJoypadState
-    ;TODO call audioUpdate
+    call audioUpdate
     pop  af
     dec  a
     jr   nz, .wait

@@ -124,7 +124,7 @@ LevelSelect:
     call waitVBlank
     call hDMARoutine
     call updateJoypadState
-    ; TODO call audioUpdate
+    call audioUpdate
 
     ld   a, [wJoypadPressed]
     cp   PADF_DOWN

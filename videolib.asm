@@ -15,9 +15,8 @@ hDMARoutine:
     ds 16
 .end:
 
-hVBlankCount:
-    ds 1
-hLagFrames:
+hVBlankCount: ds 1
+hLagFrames: ds 1
 }
 
 #SECTION "VideoLib", ROM0 {
@@ -138,6 +137,7 @@ executeHDMAList:
 #SECTION "VBlankISR", ROM0[$0040] {
     push af
     ldh  a, [hVBlankCount]
+    inc  a
     ldh  [hVBlankCount], a
     pop  af
     reti

@@ -17,6 +17,7 @@
 #INCLUDE "render.asm"
 #INCLUDE "undo.asm"
 #INCLUDE "objectmetadata.asm"
+#INCLUDE "audio.asm"
 
 
 GBC_HEADER "Baba", $1B, entry
@@ -39,14 +40,15 @@ entry:
     ld   [wCurrentLevelIndex], a
 
     call initVideo
-    ;call audioInit
+    call audioInit
     ld   hl, Palette
     call loadPal
 
-    ; Disable interrupts and setup the VBlank interrupt to set IF
+    ; Enable interrupts and setup the VBlank interrupt to set IF
     di
     ld   a, 1
     ldh  [rIE], a
+    ei
 
     ld   a, [sSaveLevelCleared]
     and  a, a

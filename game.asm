@@ -48,7 +48,7 @@ RunGame:
     call RenderUpdateOAM
     call hDMARoutine
     call updateJoypadState
-    ;TODO call audioUpdate
+    call audioUpdate
     ld   a, [wJoypadPressed]
     cp   PADF_DOWN
     jr   z, .playerDown
