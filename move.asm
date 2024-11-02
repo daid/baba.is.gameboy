@@ -75,6 +75,8 @@ DoTurnExecuteMoves:
     ld   a, [hl]
     xor  1
     ld   [hl], a
+    ld   h, HIGH(wObjects.move)
+    inc  [hl] ; If we turn around, we try to make another step.
     jr   .loop
 
 ; check if the object L can move to direction hMultiPurpose0
