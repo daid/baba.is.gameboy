@@ -186,6 +186,9 @@ LoadLevel:
     ld   a, c
     inc  d ; HIGH(wObjects.dir)
     ld   [de], a ; store dir
+    inc  d ; HIGH(wObjects.move)
+    xor  a
+    ld   [de], a ; set move to zero
     ld   d, HIGH(wObjects.type)
     inc  e
     jr   .loop
