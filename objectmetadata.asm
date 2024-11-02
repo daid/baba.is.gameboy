@@ -69,7 +69,7 @@ MetaTileData:
     db $00, $01, $00 ; 3B
     db $00, $01, $00 ; 3C
     db $00, $01, $00 ; 3D
-    db $00, $01, $00 ; 3E TID_ISLAND
+    db $00, $01, $00 ; 3E
     db $02, $80, $07 ; 3F TID_LINK
     db $01, $20, $00 ; 40 TID_IS
     db $00, $01, $00 ; 41
@@ -197,7 +197,7 @@ MetaTileData:
     db $00, $01, $00 ; BB
     db $00, $01, $00 ; BC
     db $00, $01, $00 ; BD
-    db $01, $A2, $00 ; BE TID_ISLAND | TID_TEXT
+    db $01, $A2, $00 ; BE
     db $01, $A0, $07 ; BF TID_LINK | TID_TEXT
     db $01, $E0, $04 ; C0 TID_YOU
     db $01, $E2, $06 ; C1 TID_WIN
@@ -208,7 +208,7 @@ MetaTileData:
     db $01, $EC, $01 ; C6 TID_HOT
     db $01, $EE, $03 ; C7 TID_MELT
     db $01, $C0, $02 ; C8 TID_MOVE
-    db $01, $A4, $07 ; C9 TID_REAL
+    db $01, $A4, $07 ; C9
     db $00, $01, $00 ; CA
     db $00, $01, $00 ; CB
     db $00, $01, $00 ; CC
