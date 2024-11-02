@@ -1,7 +1,7 @@
 #MACRO LEVEL_ROW _name, _data {
     #SECTION _name, ROMX, BANK[1] {
     level_name ## _data:
-        db _name
+        db _name, 0
     }
     dw level_name ## _data, _data
 }

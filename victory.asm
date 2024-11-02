@@ -38,6 +38,7 @@ victoryAnimation:
 
 .scrollUp:
     call waitVBlank
+    call audioUpdate
     ldh a, [rWY]
     sub 4
     ldh [rWY], a
