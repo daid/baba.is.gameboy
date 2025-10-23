@@ -242,5 +242,5 @@ BuildObjectPositionCache:
 
 #SECTION "GameGFX", ROMX[$4000], BANK[1] {
 GameGraphics:
-#INCGFX "baba.png"
+#INCGFX "baba.png", COLORMAP[$000000, $555555, $AAAAAA, $FFFFFF], DEBUG
 }

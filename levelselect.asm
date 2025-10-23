@@ -1,6 +1,6 @@
 #SECTION "LevelSelectGFX", ROMX[$5000], BANK[1] {
 LevelSelectGraphics:
-#INCGFX "baba_font.png"
+#INCGFX "baba_font.png", COLORMAP[$000000, $FF0000, $00FF00, $FFFFFF], DEBUG
 }
 
 #SECTION "LevelSelectWRAM", WRAM0 {
