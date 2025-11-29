@@ -21,10 +21,10 @@ ProcessRules:
     ; found an IS, find objects left and right of it and apply that rule.
     inc  h ; HIGH(wObjects.yx)
     ld   a, [hl]
-    push hl
+    push hl ; (save object index for next iteration)
     ld   h, HIGH(wTileBufferA)
     ld   l, a ; l = YX
-    push hl ; wTileBufferA[YX]
+    push hl ; wTileBufferA[YX] (save YX position for vertical use)
     and  $0F
     dec  a
     cp   15
@@ -55,6 +55,8 @@ ProcessRules:
     ld   h, HIGH(wObjects.type)
     jr   .searchISLoop
 
+; Apply rules of [left] is [right].
+; This accounts for stacked objects on [left] or [right] by using wObjects.next
 ; a = obj index of left object
 ; e = obj index of right object
 ApplyRuleStep1:

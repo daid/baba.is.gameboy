@@ -43,7 +43,7 @@ LevelMap:
     db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 
 LevelTable:
-    LEVEL_ROW "0: LINK IS YOU", Level0
+    LEVEL_ROW "0: BABA IS YOU", Level0
     LEVEL_ROW "1: Press A to UNDO", Level1
     LEVEL_ROW "2: A&B is RESET", Level2
     LEVEL_ROW "3: Out of reach", Level3

@@ -28,17 +28,22 @@ def put_gfx_tile(x, y, tile_nr, pal_nr, flip=False):
             else:
                 img.putpixel((x + xp, y + yp), c)
 
+object_id = -1
 object_nr = 0
-object_names = []
+object_info = []
+object_by_name = {}
 can_rotate = set()
 for line in open(os.path.dirname(__file__) + "/objectmetadata.asm", "rt"):
+    if "db " in line:
+        object_id += 1
     m = re.match(r" +db \$(..), \$(..), \$(..) ; .. (.+)", line)
     if not m:
         continue
     render_type, tile_id, palette, name = m.groups()
     if name == "TID_NO_OBJECT":
         continue
-    object_names.append(name)
+    object_info.append({"name": name, "id": object_id, "gfx_id": object_nr})
+    object_by_name[name] = object_info[-1]
     render_type, tile_id, palette = int(render_type, 16), int(tile_id, 16), int(palette, 16)
     if render_type == 0:
         for y in range(4):
@@ -115,7 +120,7 @@ for line in open(os.path.dirname(__file__) + "/levels.asm", "rt"):
 import pygame
 pygame.init()
 img = img.convert("RGB")
-surface = pygame.display.set_mode((16 * 16 + 16 * 3, 16 * 16), pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.SCALED)
+surface = pygame.display.set_mode((16 * 16 + 16 * 4, 16 * 16), pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.SCALED)
 font = pygame.font.Font(pygame.font.get_default_font(), 12)
 pygame.display.set_caption(current_level.name)
 
@@ -124,19 +129,24 @@ pyimg.set_colorkey(0)
 
 class Button:
     ALL = []
-    def __init__(self, x, y, label, callback):
+    def __init__(self, x, y, *, label="", gfx_id=None, callback):
         self.x = x
         self.y = y
+        self.active = False
         self.label = label
+        self.gfx_id = gfx_id
         self.callback = callback
         self.ALL.append(self)
         self._text_surface = None
 
     def draw(self):
-        surface.fill(0x202020, (256 + self.x * 16, self.y * 16, 16, 16))
+        surface.fill(0x402040 if self.active else 0x202020, (256 + self.x * 16, self.y * 16, 16, 16))
         if self._text_surface is None:
             self._text_surface = font.render(self.label, True, 0xFFFFFFFF)
-        surface.blit(self._text_surface, dest=(256 + self.x * 16 + 8 - self._text_surface.get_width() // 2, self.y * 16 + 8 - self._text_surface.get_height() // 2))
+        if self.label:
+            surface.blit(self._text_surface, dest=(256 + self.x * 16 + 8 - self._text_surface.get_width() // 2, self.y * 16 + 8 - self._text_surface.get_height() // 2))
+        if self.gfx_id is not None:
+            surface.blit(pyimg, (256 + self.x * 16, self.y * 16), (self.gfx_id * 16, 48, 16, 16))
 
 
 active_layer = 0
@@ -181,16 +191,32 @@ def shift_level(ox, oy):
         new_layers.append(new_layer)
     current_level.layers = new_layers
 
+x, y = 0, 0
+for info in object_info:
+    def make_cb(name):
+        def cb():
+            global current_tile
+            current_tile = name
+            for info in object_info:
+                info["button"].active = info["name"] == name
+        return cb
+    if info["id"] in {0x80, 0xC0} or y == 16:
+        x += 1
+        y = 0
+    info["button"] = Button(x, y, gfx_id=info["gfx_id"], callback=make_cb(info["name"]))
+    y += 1
+    print(info["id"])
 
-Button(2, 0, "1", lambda: set_layer(0))
-Button(2, 1, "2", lambda: set_layer(1))
-Button(2, 2, "3", lambda: set_layer(2))
-Button(2, 4, "N", next_level)
-Button(2, 5, "E", export)
-Button(2, 7, "<", lambda: shift_level(1, 0))
-Button(2, 8, ">", lambda: shift_level(-1, 0))
-Button(2, 9, "^", lambda: shift_level(0, 1))
-Button(2, 10, "v", lambda: shift_level(0, -1))
+x += 1
+Button(x, 0, label="1", callback=lambda: set_layer(0))
+Button(x, 1, label="2", callback=lambda: set_layer(1))
+Button(x, 2, label="3", callback=lambda: set_layer(2))
+Button(x, 4, label="N", callback=next_level)
+Button(x, 5, label="E", callback=export)
+Button(x, 7, label="<", callback=lambda: shift_level(1, 0))
+Button(x, 8, label=">", callback=lambda: shift_level(-1, 0))
+Button(x, 9, label="^", callback=lambda: shift_level(0, 1))
+Button(x, 10, label="v", callback=lambda: shift_level(0, -1))
 
 while True:
     for e in pygame.event.get():
@@ -204,14 +230,13 @@ while True:
                 direction = 3
                 if current_level.layers[active_layer][x+y*16] is not None and current_level.layers[active_layer][x+y*16][0] == current_tile and current_tile in can_rotate:
                     direction = (current_level.layers[active_layer][x+y*16][1] + 1) % 4
-                current_level.layers[active_layer][x+y*16] = (current_tile, direction) if draw_tile else None
+                if current_tile is not None:
+                    current_level.layers[active_layer][x+y*16] = (current_tile, direction) if draw_tile else None
             else:
                 x -= 16
                 for b in Button.ALL:
                     if b.x == x and b.y == y:
                         b.callback()
-                if x * 16 + y < len(object_names):
-                    current_tile = object_names[x*16 + y]
 
     surface.fill(0)
     surface.fill(0x100000, (0, 0, 160, 144))
@@ -227,16 +252,10 @@ while True:
                 if current_level.layers[layer][x+y*16] is None:
                     continue
                 name, direction = current_level.layers[layer][x+y*16]
-                tile_id = object_names.index(name)
+                tile_id = object_by_name[name]["gfx_id"]
                 surface.blit(pyimg, (x*16, y*16), (tile_id * 16, direction * 16, 16, 16))
 
     pyimg.set_alpha(255)
-    for idx, name in enumerate(object_names):
-        x = idx // 16
-        y = idx % 16
-        surface.fill(0x402040 if current_tile == name else 0x202020, (256 + x * 16, y * 16, 16, 16))
-        surface.blit(pyimg, (256 + x * 16, y * 16), (idx * 16, 48, 16, 16))
-
     for button in Button.ALL:
         button.draw()
 

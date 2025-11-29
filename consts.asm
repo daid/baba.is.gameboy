@@ -20,6 +20,7 @@ TID_LINK = $3F
 TID_OBJ_MASK = $3F
 
 TID_IS   = $40
+TID_AND  = $41
 
 TID_PROP      = TID_TEXT | $40
 TID_YOU       = TID_PROP | $00
