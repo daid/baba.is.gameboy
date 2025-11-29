@@ -43,7 +43,7 @@ TestLevelData:
     db   $FF
 
 Level0:
-    db   TID_LINK | TID_TEXT, $34
+    db   TID_BABA | TID_TEXT, $34
     db   TID_IS, $35
     db   TID_YOU, $36
     db   TID_FLAG | TID_TEXT, $39
@@ -62,7 +62,7 @@ Level0:
     db   TID_WALL, $5C
     db   TID_WALL, $5D
     db   TID_ROCK, $67
-    db   TID_LINK, $75
+    db   TID_BABA, $75
     db   TID_ROCK, $77
     db   TID_FLAG, $7A
     db   TID_ROCK, $87
@@ -124,10 +124,10 @@ Level1:
     db   TID_WALL, $7D
     db   TID_WALL, $86
     db   TID_WALL, $8D
-    db   TID_LINK | TID_TEXT, $94
+    db   TID_BABA | TID_TEXT, $94
     db   TID_WALL, $96
     db   TID_WALL | TID_TEXT, $98
-    db   TID_LINK, $9A
+    db   TID_BABA, $9A
     db   TID_WALL, $9D
     db   TID_IS, $A4
     db   TID_WALL, $A6
@@ -169,8 +169,8 @@ Level2:
     db   TID_FLAG, $43
     db   TID_FLAG, $4C
     db   TID_FLAG, $53
-    db   TID_LINK | TID_TEXT, $55
-    db   TID_LINK, $59
+    db   TID_BABA | TID_TEXT, $55
+    db   TID_BABA, $59
     db   TID_FLAG, $5C
     db   TID_FLAG, $63
     db   TID_FLAG, $6C
@@ -214,7 +214,7 @@ Level2:
 
 Level3:
     db   TID_WALL | TID_TEXT, $00
-    db   TID_LINK | TID_TEXT, $01
+    db   TID_BABA | TID_TEXT, $01
     db   TID_IS, $10
     db   TID_IS, $11
     db   TID_STOP, $20
@@ -230,7 +230,7 @@ Level3:
     db   TID_WALL, $34
     db   TID_WALL, $3B
     db   TID_WALL, $44
-    db   TID_LINK, $46
+    db   TID_BABA, $46
     db   TID_ROCK, $48
     db   TID_WALL, $4B
     db   TID_WATR | TID_TEXT, $53
@@ -303,7 +303,7 @@ Level3:
     db   $FF
 
 Level4:
-    db   TID_LINK | TID_TEXT, $00
+    db   TID_BABA | TID_TEXT, $00
     db   TID_IS, $01
     db   TID_YOU, $02
     db   TID_FLAG | TID_TEXT, $10
@@ -352,7 +352,7 @@ Level4:
     db   TID_ROCK, $D2
     db   TID_SKUL, $D4
     db   TID_SKUL, $E0
-    db   TID_LINK, $E2
+    db   TID_BABA, $E2
     db   TID_SKUL, $E4
     db   TID_SKUL, $F0
     db   TID_SKUL, $F4
@@ -368,14 +368,14 @@ Level5:
     db   TID_DEFEAT, $12
     db   TID_LAVA, $18
     db   TID_LAVA, $28
-    db   TID_LINK, $36
+    db   TID_BABA, $36
     db   TID_LAVA, $38
     db   TID_FLAG, $3A
     db   TID_LAVA, $48
-    db   TID_LINK | TID_TEXT, $53
-    db   TID_BABA | TID_TEXT, $55
+    db   TID_BABA | TID_TEXT, $53
+    db   TID_KEKE | TID_TEXT, $55
     db   TID_LAVA, $58
-    db   TID_BABA, $5A
+    db   TID_KEKE, $5A
     db   TID_IS, $63
     db   TID_IS, $65
     db   TID_LAVA, $68
@@ -447,7 +447,6 @@ Level6:
     db   TID_WALL, $73
     db   TID_LAVA, $7A
     db   TID_LAVA, $7B
-    db   $F0, TID_LINK, $7C
     db   TID_IS, $82
     db   TID_LAVA, $8A
     db   TID_LAVA, $8B
@@ -1025,5 +1024,4 @@ Level14:
     db   TID_YOU, $16
     db   TID_LINK, $44
     db   $FF
-
 }

@@ -1,6 +1,7 @@
 import PIL.Image
 import os
 import re
+import time
 
 input_img = PIL.Image.open(os.path.dirname(__file__) + "/baba.png")
 img = PIL.Image.new("P", (16 * 256, 16 * 4))
@@ -240,3 +241,4 @@ while True:
         button.draw()
 
     pygame.display.flip()
+    time.sleep(0.01)
